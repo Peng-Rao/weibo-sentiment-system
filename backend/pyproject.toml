@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Peng Rao <76681491+Raopend@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
+scrapy = "^2.11.1"
+scrapy-fake-useragent = "^1.4.4"
+pymongo = "^4.6.2"
+celery = {extras = ["rabbitmq"], version = "^5.3.6"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
