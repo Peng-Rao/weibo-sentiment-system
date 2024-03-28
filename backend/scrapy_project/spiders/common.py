@@ -118,6 +118,8 @@ def parse_tweet_info(data):
         tweet['retweet_id'] = data['retweeted_status']['mid']
     if 'reads_count' in data:
         tweet['reads_count'] = data['reads_count']
+    if tweet['ip_location']:
+        tweet['ip_location'] = tweet['ip_location'].replace('发布于 ', '')
     return tweet
 
 

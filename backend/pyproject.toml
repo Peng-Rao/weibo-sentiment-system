@@ -13,6 +13,9 @@ scrapy = "^2.11.1"
 scrapy-fake-useragent = "^1.4.4"
 pymongo = "^4.6.2"
 celery = {extras = ["rabbitmq"], version = "^5.3.6"}
+jieba = "^0.42.1"
+torch = "^2.2.1"
+gensim = "^4.3.2"
 
 
 [build-system]
