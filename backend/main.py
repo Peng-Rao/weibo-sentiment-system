@@ -5,17 +5,12 @@ from typing import Dict
 from fastapi import FastAPI, WebSocket, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
 from starlette.websockets import WebSocketDisconnect
 
 from classifier.model import LstmClassifier, get_classifier
-from scrapy_project.spiders.tweet_by_keyword import TweetSpiderByKeyword
-from scrapy_project.spiders.tweet_spider_by_user_id import TweetSpiderByUserID
-from scrapy_project.spiders.user import UserSpider
-from scrapy_project.spiders.comment import CommentSpider
 import sys
 import os
+import requests
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '.', 'scrapy_project'))
 
@@ -59,15 +54,6 @@ def generate_data():
         "series": [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
     }
 
-
-@app.get("/")
-async def root():
-    process = CrawlerProcess(get_project_settings())
-    await process.crawl(TweetSpiderByKeyword, keyword='python')
-    process.start()
-    return {"message": "Hello World"}
-
-
 @app.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
@@ -103,3 +89,15 @@ def predict(request: SentimentRequest, model: LstmClassifier = Depends(get_class
         sentiment=sentiment,
         confidence=confidence
     )
+
+
+@app.get("/start_crawler")
+def start_crawler():
+    url = 'http://localhost:6800/schedule.json'
+    data = {
+        'project': 'crawler',
+        'spider': 'tweet_by_keyword',
+        'keyword': 'Java',
+    }
+    response = requests.post(url, data=data)
+    return response.json()

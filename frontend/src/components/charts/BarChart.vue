@@ -5,8 +5,9 @@ import {DatasetComponent, GridComponent} from "echarts/components";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import VChart from "vue-echarts";
 import theme from "@/components/charts/theme.json";
+import {CanvasRenderer} from "echarts/renderers";
 
-use([BarChart, DatasetComponent, GridComponent]);
+use([BarChart, DatasetComponent, GridComponent, CanvasRenderer]);
 registerTheme("ovilia-green", theme);
 
 // const seconds = shallowRef(0);
@@ -37,12 +38,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div>
         <v-chart
             :option="option"
             theme="ovilia-green"
             autoresize
             style="height: 100vh"
         ></v-chart>
-    </div>
 </template>

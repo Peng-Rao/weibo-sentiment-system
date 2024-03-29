@@ -4,8 +4,8 @@ const router = createRouter({
     history: createWebHashHistory(), // hash 模式
     routes: [
         {
-            path: '/',
-            component: () => import('@/views/Index.vue')
+            path: '/keyword',
+            component: () => import('@/views/KeywordAnalysis.vue')
         },
         {
             path: '/test',
