@@ -10,12 +10,12 @@ python = "^3.12"
 fastapi = "^0.110.0"
 uvicorn = {extras = ["standard"], version = "^0.29.0"}
 scrapy-fake-useragent = "^1.4.4"
-pymongo = "^4.6.2"
-celery = {extras = ["redis"], version = "^5.3.6"}
 jieba = "^0.42.1"
 torch = "^2.2.1"
 gensim = "^4.3.2"
 requests = "^2.31.0"
+motor = "^3.4.0"
+pandas = "^2.2.1"
 
 
 [build-system]

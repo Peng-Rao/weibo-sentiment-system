@@ -1,5 +1,6 @@
 import asyncio
 import random
+from db import connect_to_mongo, close_mongo_connection
 from typing import Dict
 
 from fastapi import FastAPI, WebSocket, Depends
@@ -11,10 +12,22 @@ from classifier.model import LstmClassifier, get_classifier
 import sys
 import os
 import requests
+from routers import get_tweet_by_keyword
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '.', 'scrapy_project'))
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+async def startup_event():
+    await connect_to_mongo()
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    await close_mongo_connection()
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,6 +36,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(get_tweet_by_keyword.router)
 
 
 class SentimentRequest(BaseModel):
@@ -53,6 +68,7 @@ def generate_data():
         "yAxis": {},
         "series": [{"type": "bar"}, {"type": "bar"}, {"type": "bar"}],
     }
+
 
 @app.get("/hello/{name}")
 async def say_hello(name: str):
