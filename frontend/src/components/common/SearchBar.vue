@@ -1,11 +1,15 @@
 <script setup>
 import {ref} from 'vue';
 import {useSearchStore} from '@/stores/useSearchStore';
+import {useRouter} from 'vue-router';
+import {startCrawler} from "@/api/startCrawler.js";
+
+const router = useRouter();
 
 const searchQuery = ref('');
 const searchStore = useSearchStore();
 
-function performSearch() {
+async function performSearch() {
     searchStore.showLoading();
     setTimeout(() => {
         console.log('搜索关键词:', searchQuery.value);
@@ -13,6 +17,13 @@ function performSearch() {
         searchStore.hideLoading();
         searchStore.showChart();
     }, 2000); // 搜索和加载过程
+    try {
+        const response = await startCrawler('/start_crawler', {keyword: searchQuery.value});
+        console.log('爬虫启动成功:', response);
+        await router.push({name: 'dashboard'});
+    } catch (error) {
+        console.error('启动爬虫失败:', error);
+    }
 }
 </script>
 

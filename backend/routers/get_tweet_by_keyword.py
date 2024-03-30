@@ -3,7 +3,6 @@ from typing import List, Dict
 
 from fastapi import APIRouter, Depends
 
-from classifier.model import LstmClassifier, get_classifier
 from models import TweetItem, ProvinceCount
 from motor.motor_asyncio import AsyncIOMotorClient
 from db import DataBase, get_database

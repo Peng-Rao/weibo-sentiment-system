@@ -75,7 +75,7 @@ let ws = null
 
 import {useSearchStore} from "@/stores/useSearchStore";
 
-const keyword = computed(() => useSearchStore().searchKeyword);
+const searchKeyword = computed(() => useSearchStore().searchKeyword);
 
 onMounted(() => {
     ws = new WebSocket('ws://localhost:8000/ws/province-count');
@@ -87,9 +87,15 @@ onMounted(() => {
 
     // 发送关键词
     ws.onopen = () => {
-        ws.send(keyword.value);
+        ws.send(searchKeyword.value);
         console.log('WebSocket connection opened.');
     }
+
+    // 每隔1s时间发送关键词
+    setInterval(() => {
+        if (ws.readyState === ws.OPEN)
+            ws.send(searchKeyword.value);
+    }, 1000);
 
     ws.onerror = (error) => console.error('WebSocket error:', error);
     ws.onclose = () => console.log('WebSocket connection closed.');

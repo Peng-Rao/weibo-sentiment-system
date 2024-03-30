@@ -3,16 +3,17 @@ import random
 from db import connect_to_mongo, close_mongo_connection
 from typing import Dict
 
-from fastapi import FastAPI, WebSocket, Depends
+from fastapi import FastAPI, WebSocket, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from starlette.websockets import WebSocketDisconnect
 
-from classifier.model import LstmClassifier, get_classifier
 import sys
 import os
 import requests
-from routers import get_tweet_by_keyword
+
+from models import CrawlerRequest
+from routers import get_tweet_by_keyword, get_datasatas
 
 app = FastAPI()
 
@@ -36,6 +37,7 @@ app.add_middleware(
 )
 
 app.include_router(get_tweet_by_keyword.router)
+app.include_router(get_datasatas.router)
 
 
 class SentimentRequest(BaseModel):
@@ -95,23 +97,27 @@ async def websocket_endpoint(websocket: WebSocket):
         print(f"WebSocket disconnected with close code: {websocket.client_state}")
 
 
-@app.post("/predict", response_model=SentimentResponse)
-def predict(request: SentimentRequest, model: LstmClassifier = Depends(get_classifier)):
-    probabilities, sentiment, confidence = model.predict(request.text)
-    return SentimentResponse(
-        probabilities=probabilities,
-        sentiment=sentiment,
-        confidence=confidence
-    )
+# @app.post("/predict", response_model=SentimentResponse)
+# def predict(request: SentimentRequest, model: LstmClassifier = Depends(get_classifier)):
+#     probabilities, sentiment, confidence = model.predict(request.text)
+#     return SentimentResponse(
+#         probabilities=probabilities,
+#         sentiment=sentiment,
+#         confidence=confidence
+#     )
 
 
-@app.get("/start_crawler")
-def start_crawler():
+@app.post("/start_crawler")
+async def start_crawler(request: CrawlerRequest):
     url = 'http://localhost:6800/schedule.json'
     data = {
         'project': 'crawler',
         'spider': 'tweet_by_keyword',
-        'keyword': 'Java',
+        'keyword': request.keyword  # 使用模型属性
     }
-    response = requests.post(url, data=data)
+    try:
+        response = requests.post(url, data=data)
+        response.raise_for_status()  # 触发HTTP错误
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=400, detail=str(e))
     return response.json()

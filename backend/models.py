@@ -7,6 +7,10 @@ class ProvinceCount(BaseModel):
     value: int
 
 
+class CrawlerRequest(BaseModel):
+    keyword: str
+
+
 class TweetItem(BaseModel):
     # mblogid: str = Field(...)
     # created_at: str = Field(...)
