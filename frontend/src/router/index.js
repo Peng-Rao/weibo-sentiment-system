@@ -14,6 +14,10 @@ const router = createRouter({
         {
             path: '/prediction',
             component: () => import('@/views/Prediction.vue')
+        },
+        {
+            path: '/dashboard',
+            component: () => import('@/views/Dashboard.vue')
         }
     ]
 })

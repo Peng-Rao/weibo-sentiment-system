@@ -12,7 +12,7 @@ function performSearch() {
         searchStore.setSearchKeyword(searchQuery.value);
         searchStore.hideLoading();
         searchStore.showChart();
-    }, 5000); // 搜索和加载过程
+    }, 2000); // 搜索和加载过程
 }
 </script>
 

@@ -1,5 +1,10 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 from pydantic import BaseModel, Field, HttpUrl
+
+
+class ProvinceCount(BaseModel):
+    name: str
+    value: int
 
 
 class TweetItem(BaseModel):
