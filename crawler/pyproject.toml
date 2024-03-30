@@ -12,6 +12,9 @@ pymongo = "^4.6.3"
 scrapy-fake-useragent = "^1.4.4"
 scrapyd = "^1.4.3"
 scrapyd-client = "^1.2.3"
+torch = "^2.2.2"
+gensim = "^4.3.2"
+jieba = "^0.42.1"
 
 
 [build-system]

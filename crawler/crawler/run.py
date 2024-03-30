@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # process.crawl(mode_to_spider['tweet_by_keyword'])
     # process.crawl(mode_to_spider['tweet_spider_by_user_id'])
     # process.crawl(mode_to_spider['tweet_spider_by_tweet_id'])
-    process.crawl(mode_to_spider['comment'])
+    process.crawl(mode_to_spider['tweet_by_keyword'])
     # process.crawl(mode_to_spider['user'])
     # the script will block here until the crawling is finished
     process.start()

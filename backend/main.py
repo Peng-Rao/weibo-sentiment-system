@@ -14,8 +14,6 @@ import os
 import requests
 from routers import get_tweet_by_keyword
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '.', 'scrapy_project'))
-
 app = FastAPI()
 
 

@@ -5,6 +5,7 @@ from torch import nn
 import gensim
 from classifier.helper import collate_fn
 from classifier.utils import processing
+import os
 
 
 # 定义网络结构
@@ -41,8 +42,9 @@ class LstmClassifier:
         num_layers = 2
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.classifier: LSTM = LSTM(embed_size, hidden_size, num_layers)
-        self.classifier.load_state_dict(torch.load("classifier/models/02_lstm_model.pth", map_location=self.device))
-        self.word2vec = gensim.models.Word2Vec.load("classifier/models/word2vec.model")
+        print(os.getcwd())
+        self.classifier.load_state_dict(torch.load("../classifier/models/02_lstm_model.pth", map_location=self.device))
+        self.word2vec = gensim.models.Word2Vec.load("../classifier/models/word2vec.model")
 
     def predict(self, text: str) -> Tuple[Dict[str, float], str, float]:
         """
