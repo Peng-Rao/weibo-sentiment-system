@@ -28,7 +28,6 @@ async def websocket_province_count(websocket: WebSocket, db: DataBase = Depends(
         # 等待客户端发送关键字
         data = await websocket.receive_text()
         keyword = data  # 假设客户端发送的仅是关键字字符串
-        print(f"Received keyword: {keyword}")
 
         query = {}
         if keyword:
@@ -57,5 +56,4 @@ async def websocket_province_count(websocket: WebSocket, db: DataBase = Depends(
         ]
 
         # 将结果发送回客户端
-        print(f"Sending result: {result}")
         await websocket.send_json(result)

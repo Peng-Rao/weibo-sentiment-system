@@ -108,7 +108,6 @@ onMounted(() => {
     ws.onmessage = (event) => {
         // 假设后端按照原有结构发送数据更新
         const data = JSON.parse(event.data);
-        console.log(data)
         // 更新cardItems的值
         cardItems.value.forEach((item, index) => {
             const update = data.find(updateItem => updateItem.title === item.title)

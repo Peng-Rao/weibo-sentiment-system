@@ -17,10 +17,8 @@ router = APIRouter()
 async def websocket_datasatas(websocket: WebSocket, db: DataBase = Depends(get_database)):
     await websocket.accept()
     while True:
-        print("Waiting for keyword")
         data = await websocket.receive_text()
         keyword = data  # 假设客户端发送的仅是关键字字符串
-        print(f"Received keyword: {keyword}")
         query = {"keyword": keyword} if keyword else {}
         collection = db.client["weibo-sentiment-system"]["tweet_by_keyword"]
         # 统计文档数量
