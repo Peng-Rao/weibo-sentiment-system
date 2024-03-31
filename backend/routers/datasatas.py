@@ -1,20 +1,13 @@
-import asyncio
-
-from starlette.websockets import WebSocket, WebSocketDisconnect
-from typing import List, Dict
-
 from fastapi import APIRouter, Depends
+from starlette.websockets import WebSocket
 
-from models import TweetItem, ProvinceCount
-from motor.motor_asyncio import AsyncIOMotorClient
-from db import DataBase, get_database
-import pandas as pd
+from dependencies import DataBase, get_database
 
 router = APIRouter()
 
 
 @router.websocket("/ws/datasatas")
-async def websocket_datasatas(websocket: WebSocket, db: DataBase = Depends(get_database)):
+async def get_datasatas(websocket: WebSocket, db: DataBase = Depends(get_database)):
     await websocket.accept()
     while True:
         data = await websocket.receive_text()

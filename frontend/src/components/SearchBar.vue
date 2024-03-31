@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from 'vue';
-import {useSearchStore} from '@/stores/useSearchStore';
+import {useSearchStore} from '@/stores/useSearchStore.js';
 import {useRouter} from 'vue-router';
 import {startCrawler} from "@/api/startCrawler.js";
 

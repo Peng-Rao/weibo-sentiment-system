@@ -119,7 +119,6 @@ const apexOptions = {
         </div>
       </div>
     </div>
-
     <div>
       <div id="chartTwo" class="-ml-5 -mb-9">
         <VueApexCharts

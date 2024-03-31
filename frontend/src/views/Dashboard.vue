@@ -2,11 +2,22 @@
 
 import ChartThree from "@/components/Charts/ChartThree.vue";
 import ChartTwo from "@/components/Charts/ChartTwo.vue";
-import ChartOne from "@/components/Charts/ChartOne.vue";
 import DefaultLayout from "../../layout/DefaultLayout.vue";
 import MapChart from "@/components/Charts/MapChart.vue";
-import DataStatsOne from "@/components/DataSatas/DataStatsOne.vue";
-import BarChart from "@/components/Charts/BarChart.vue";
+import DataStatsOne from "@/components/Dashboard/DataStats.vue";
+import TweetTrend from "@/components/Dashboard/TweetTrend.vue";
+
+import {onMounted} from 'vue';
+import { useRoute } from 'vue-router';
+
+// 使用useRoute获取当前路由信息
+const route = useRoute();
+import {useSearchStore} from "@/stores/useSearchStore.js";
+
+// 设置 store 的搜索关键词
+onMounted(() => {
+    useSearchStore().setSearchKeyword(route.query.keyword);
+});
 </script>
 
 <template>
@@ -17,12 +28,12 @@ import BarChart from "@/components/Charts/BarChart.vue";
 
         <div class="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
             <!-- ====== Chart One Start -->
-            <ChartOne/>
+            <tweet-trend/>
             <!-- ====== Chart One End -->
 
             <!-- ====== Chart Two Start -->
-<!--            <ChartTwo/>-->
-            <bar-chart/>
+            <ChartTwo/>
+<!--            <bar-chart/>-->
             <!-- ====== Chart Two End -->
 
             <!-- ====== Chart Three Start -->

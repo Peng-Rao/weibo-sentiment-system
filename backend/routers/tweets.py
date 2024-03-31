@@ -1,17 +1,14 @@
+from fastapi import APIRouter, Depends
 from starlette.websockets import WebSocket
 from typing import List, Dict
 
-from fastapi import APIRouter, Depends
-
-from models import TweetItem, ProvinceCount
-from motor.motor_asyncio import AsyncIOMotorClient
-from db import DataBase, get_database
-import pandas as pd
+from dependencies import DataBase, get_database
+from models import TweetItem
 
 router = APIRouter()
 
 
-@router.get("/get_tweet_by_keyword", response_model=List[TweetItem])
+@router.get("/get_tweet_by_keyword", response_model=List[TweetItem], tags=["tweets"])
 async def get_tweet_by_keyword(keyword: str, db: DataBase = Depends(get_database)):
     collection = db.client["weibo-sentiment-system"]["tweet_by_keyword"]
     tweets = []

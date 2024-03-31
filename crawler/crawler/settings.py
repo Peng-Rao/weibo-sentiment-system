@@ -47,7 +47,7 @@ DEFAULT_REQUEST_HEADERS = {
     'Cookie': cookie
 }
 
-DOWNLOAD_DELAY = 0.2
+DOWNLOAD_DELAY = 1
 
 
 # Enable or disable spider middlewares
