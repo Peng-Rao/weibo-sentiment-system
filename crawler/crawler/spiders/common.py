@@ -46,9 +46,9 @@ def url_to_mid(url: str):
 
 def parse_time(s):
     """
-    Wed Oct 19 23:44:36 +0800 2022 => 2022-10-19 23:44:36
+    Wed Oct 19 23:44:36 +0800 2022 => ISO
     """
-    return dateutil.parser.parse(s).strftime('%Y-%m-%d %H:%M:%S')
+    return dateutil.parser.parse(s).isoformat()
 
 
 def parse_user_info(data):

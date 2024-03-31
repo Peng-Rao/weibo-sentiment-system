@@ -18,7 +18,7 @@ class TweetSpiderByKeyword(Spider):
         super().__init__(*args, **kwargs)
         self.keyword = keyword if keyword else 'python'
         # 爬取时间为过去一个月
-        now_time = datetime.datetime.now()
+        now_time = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         self.start_time = now_time - datetime.timedelta(days=30)
         self.end_time = now_time
         self.is_split_by_hour = is_split_by_hour

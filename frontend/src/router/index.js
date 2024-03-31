@@ -4,16 +4,14 @@ const router = createRouter({
     history: createWebHashHistory(), // hash 模式
     routes: [
         {
+            name: 'index',
             path: '/',
             component: () => import('@/views/Index.vue')
         },
         {
-            path: '/test',
-            component: () => import('@/views/WebSockerDemo.vue')
-        },
-        {
-            path: '/prediction',
-            component: () => import('@/views/Prediction.vue')
+            name: 'classification',
+            path: '/classification',
+            component: () => import('@/views/TextClassification.vue')
         },
         {
             name: 'dashboard',

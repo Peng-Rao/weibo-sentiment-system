@@ -6,7 +6,7 @@ from typing import Dict
 
 from dependencies import connect_to_mongo, close_mongo_connection
 from models import CrawlerRequest
-from routers import tweets, datasatas, crawler
+from routers import tweets, datasatas, crawler, tweet_trend
 
 app = FastAPI()
 
@@ -32,7 +32,7 @@ app.add_middleware(
 app.include_router(tweets.router)
 app.include_router(datasatas.router)
 app.include_router(crawler.router)
-# app.include_router(tweet_trend.router)
+app.include_router(tweet_trend.router)
 
 
 class SentimentRequest(BaseModel):

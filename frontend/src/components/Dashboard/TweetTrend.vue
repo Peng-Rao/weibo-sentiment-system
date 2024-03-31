@@ -7,11 +7,13 @@ import {useSearchStore} from "@/stores/useSearchStore";
 const searchKeyword = computed(() => useSearchStore().searchKeyword);
 const chartData = ref({
     series: [],
-    labels: []
+    labels: [],
+    start_date: '',
+    end_date: ''
 })
 
 const chart = ref(null);
-const currentRange = ref('Day') // 新添加的响应式变量，存储当前选择
+const currentRange = ref('Month') // 新添加的响应式变量，存储当前选择
 
 
 let apexOptions = {
@@ -110,8 +112,6 @@ let apexOptions = {
                 fontSize: '0px'
             }
         },
-        min: 0,
-        max: 100
     }
 }
 let ws;
@@ -127,7 +127,12 @@ function setupWebSocket() {
     ws.onmessage = function (event) {
         // Assuming the data format is { series: [...], labels: [...] }
         // You might need to adjust this according to the actual data format
-        chartData.value = JSON.parse(event.data);
+        let receiveData = JSON.parse(event.data);
+        chartData.value.series = receiveData['series'];
+        chartData.value.labels = receiveData['labels'];
+        chartData.value.start_date = receiveData['start_date'];
+        chartData.value.end_date = receiveData['end_date'];
+
         apexOptions = {
             ...apexOptions,
             xaxis: {
@@ -158,6 +163,10 @@ function setupWebSocket() {
             setupWebSocket();
         }, 3000);
     };
+
+    setInterval(() => {
+        sendCurrentRange();
+    }, 1000);
 }
 
 function sendCurrentRange() {
@@ -198,8 +207,8 @@ onUnmounted(() => {
             <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
           </span>
                     <div class="w-full">
-                        <p class="font-semibold text-primary">Total Revenue</p>
-                        <p class="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                        <p class="font-semibold text-primary">正向推文</p>
+                        <p class="text-sm font-medium">{{ chartData.start_date }} - {{ chartData.end_date }}</p>
                     </div>
                 </div>
                 <div class="flex min-w-47.5">
@@ -209,20 +218,13 @@ onUnmounted(() => {
             <span class="block h-2.5 w-full max-w-2.5 rounded-full bg-secondary"></span>
           </span>
                     <div class="w-full">
-                        <p class="font-semibold text-secondary">Total Sales</p>
-                        <p class="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+                        <p class="font-semibold text-secondary">负面推文</p>
+                        <p class="text-sm font-medium">{{ chartData.start_date }} - {{ chartData.end_date }}</p>
                     </div>
                 </div>
             </div>
             <div class="flex w-full max-w-45 justify-end">
                 <div class="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
-                    <button
-                        @click="handleRangeChange('Day')"
-                        :class="{'bg-white shadow-card': currentRange === 'Day'}"
-                        class="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white dark:text-white dark:hover:bg-boxdark"
-                    >
-                        Day
-                    </button>
                     <button
                         @click="handleRangeChange('Week')"
                         :class="{'bg-white shadow-card': currentRange === 'Week'}"
