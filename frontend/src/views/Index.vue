@@ -7,7 +7,7 @@ import MapChart from "@/components/Charts/MapChart.vue";
 import Footer from "@/components/common/Footer.vue";
 import {computed} from "vue";
 import {useSearchStore} from "@/stores/useSearchStore";
-import ChartOne from "@/components/Charts/ChartOne.vue";
+import ChartOne from "@/components/Charts/LineChart.vue";
 const isLoading = computed(() => useSearchStore().isLoading);
 const isChartVisible = computed(() => useSearchStore().isChartVisible);
 

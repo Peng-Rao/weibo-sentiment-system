@@ -20,7 +20,7 @@ async function performSearch() {
     try {
         const response = await startCrawler('/start_crawler', {keyword: searchQuery.value});
         console.log('爬虫启动成功:', response);
-        await router.push({name: 'dashboard'});
+        await router.push({name: 'dashboard', query: { keyword: searchQuery.value }});
     } catch (error) {
         console.error('启动爬虫失败:', error);
     }

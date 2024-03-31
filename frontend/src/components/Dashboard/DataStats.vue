@@ -98,7 +98,7 @@ const cardItems = ref([
 
 let ws = null
 
-import {useSearchStore} from "@/stores/useSearchStore";
+import {useSearchStore} from "@/stores/useSearchStore.js";
 
 const searchKeyword = computed(() => useSearchStore().searchKeyword);
 
@@ -136,7 +136,13 @@ onMounted(() => {
     }, 1000);
 
     ws.onerror = (error) => console.error('WebSocket error:', error);
-    ws.onclose = () => console.log('WebSocket connection closed.');
+
+
+    // 断线重连
+    ws.onclose = () => {
+        console.log('WebSocket connection closed. Reconnecting...');
+        ws = new WebSocket('ws://localhost:8000/ws/datasatas');
+    }
 });
 
 onBeforeUnmount(() => {
