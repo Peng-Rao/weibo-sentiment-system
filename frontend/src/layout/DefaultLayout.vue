@@ -1,5 +1,6 @@
 <script setup>
 import HeaderArea from "@/components/Header/HeaderArea.vue";
+import Footer from "@/components/Footer/Footer.vue";
 </script>
 
 <template>
@@ -21,6 +22,7 @@ import HeaderArea from "@/components/Header/HeaderArea.vue";
                 </div>
             </main>
             <!-- ===== Main Content End ===== -->
+            <Footer></Footer>
         </div>
     </div>
     <!-- ===== Page Wrapper End ===== -->
