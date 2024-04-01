@@ -166,7 +166,7 @@ function setupWebSocket() {
 
     setInterval(() => {
         sendCurrentRange();
-    }, 1000);
+    }, 3000);
 }
 
 function sendCurrentRange() {

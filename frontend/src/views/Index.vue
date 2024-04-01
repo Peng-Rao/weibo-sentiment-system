@@ -1,7 +1,7 @@
 <script setup>
-import NavigationBar from "@/components/Header/NavigationBar.vue";
+import NavigationBar from "@/components/Header/HeaderArea.vue";
 import SearchBar from "@/components/SearchBar.vue";
-import Footer from "@/components/common/Footer.vue";
+import Footer from "@/components/Footer/Footer.vue";
 import {computed} from "vue";
 import {useSearchStore} from "@/stores/useSearchStore";
 const isLoading = computed(() => useSearchStore().isLoading);

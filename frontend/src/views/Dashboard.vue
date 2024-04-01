@@ -2,7 +2,7 @@
 
 import ChartThree from "@/components/Charts/ChartThree.vue";
 import ChartTwo from "@/components/Charts/ChartTwo.vue";
-import DefaultLayout from "../../layout/DefaultLayout.vue";
+import DefaultLayout from "@/layout/DefaultLayout.vue";
 import MapChart from "@/components/Charts/MapChart.vue";
 import DataStatsOne from "@/components/Dashboard/DataStats.vue";
 import TweetTrend from "@/components/Dashboard/TweetTrend.vue";

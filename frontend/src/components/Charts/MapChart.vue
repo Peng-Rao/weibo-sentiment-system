@@ -5,7 +5,8 @@ import {
     GeoComponent,
     TitleComponent,
     LegendComponent,
-    TooltipComponent, VisualMapComponent
+    TooltipComponent, VisualMapComponent,
+    ToolboxComponent
 } from "echarts/components";
 import {computed, onBeforeUnmount, onMounted, ref} from "vue";
 import VChart from "vue-echarts";
@@ -22,6 +23,7 @@ use([
     TooltipComponent,
     CanvasRenderer,
     VisualMapComponent,
+    ToolboxComponent,
     MapChart
 ]);
 
@@ -36,19 +38,30 @@ const option = ref({
         fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif',
         fontWeight: 300
     },
-    title: {
-        text: "",
-        left: "center",
-        textStyle: {
-            color: "#fff",
-            fontSize: 30,
-        },
-        subtextStyle: {
-            fontSize: 20,
-        },
-    },
+    backgroundColor: "#FFFFFF",
     tooltip: {
         trigger: "item"
+    },
+    toolbox: {
+        show: true,
+        orient: 'vertical',
+        left: 'right',
+        top: 'center',
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    visualMap: {
+        min: 0,
+        max: 10000,
+        text: ['High', 'Low'],
+        realtime: false,
+        calculable: true,
+        inRange: {
+            color: ['lightskyblue', 'yellow', 'orangered']
+        }
     },
     series: [
         {
@@ -59,8 +72,8 @@ const option = ref({
             zoom: 1.2,
             aspectScale: 0.75,
             label: {
-                formatter: "{b}",
-                position: "center",
+                // formatter: "{b}",
+                position: "left",
                 show: true
             },
             itemStyle: {
@@ -95,7 +108,7 @@ onMounted(() => {
     setInterval(() => {
         if (ws.readyState === ws.OPEN)
             ws.send(searchKeyword.value);
-    }, 1000);
+    }, 5000);
 
     ws.onerror = (error) => console.error('WebSocket error:', error);
     ws.onclose = () => console.log('WebSocket connection closed.');
@@ -111,6 +124,6 @@ onBeforeUnmount(() => {
         ref="map"
         :option="option"
         autoresize
-        style="background-color: #404a59"
+        theme="ovilia-green"
     />
 </template>
