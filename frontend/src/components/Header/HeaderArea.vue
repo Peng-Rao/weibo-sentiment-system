@@ -1,6 +1,9 @@
 <script setup>
 
 import DarkMode from "@/components/Header/DarkMode.vue";
+import {computed} from "vue";
+import {useSearchStore} from "@/stores/useSearchStore.js";
+const searchKeyword = computed(() => useSearchStore().searchKeyword);
 </script>
 
 <template>
@@ -27,11 +30,7 @@ import DarkMode from "@/components/Header/DarkMode.vue";
                         <router-link to="/" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">主页</router-link>
                     </li>
                     <li>
-                        <button id="mega-menu-full-cta-image-button"
-                                data-collapse-toggle="mega-menu-full-image-dropdown"
-                                class="flex items-center justify-between w-full py-2 px-3 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
-                            关键词分析
-                        </button>
+                        <router-link :to="{path: '/dashboard', query: { keyword: searchKeyword }}" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">关键词分析</router-link>
                     </li>
                     <li>
                         <router-link to="/text-sentiment" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">文本情感分类</router-link>
