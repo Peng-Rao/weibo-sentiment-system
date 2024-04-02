@@ -11,6 +11,17 @@ class CrawlerRequest(BaseModel):
     keyword: str
 
 
+class SentimentRequest(BaseModel):
+    text: str
+
+
+class SentimentResponse(BaseModel):
+    probabilities: Dict[str, float]
+    sentiment: str
+    confidence: float
+    word_freq: List
+
+
 class TweetItem(BaseModel):
     # mblogid: str = Field(...)
     # created_at: str = Field(...)

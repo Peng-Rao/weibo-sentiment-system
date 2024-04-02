@@ -6,7 +6,7 @@ from typing import Dict
 
 from dependencies import connect_to_mongo, close_mongo_connection
 from models import CrawlerRequest
-from routers import tweets, datasatas, crawler, tweet_trend
+from routers import tweets, datasatas, crawler, tweet_trend, text_classification
 
 app = FastAPI()
 
@@ -33,23 +33,4 @@ app.include_router(tweets.router)
 app.include_router(datasatas.router)
 app.include_router(crawler.router)
 app.include_router(tweet_trend.router)
-
-
-class SentimentRequest(BaseModel):
-    text: str
-
-
-class SentimentResponse(BaseModel):
-    probabilities: Dict[str, float]
-    sentiment: str
-    confidence: float
-
-
-# @app.post("/predict", response_model=SentimentResponse)
-# def predict(request: SentimentRequest, model: LstmClassifier = Depends(get_classifier)):
-#     probabilities, sentiment, confidence = model.predict(request.text)
-#     return SentimentResponse(
-#         probabilities=probabilities,
-#         sentiment=sentiment,
-#         confidence=confidence
-#     )
+app.include_router(text_classification.router)
