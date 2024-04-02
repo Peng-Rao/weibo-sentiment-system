@@ -13,15 +13,18 @@ const isChartVisible = computed(() => useSearchStore().isChartVisible);
 <template>
     <default-layout>
         <!--容器内居中-->
-<!--                <div class="w-16 h-40 bg-transparent"></div>-->
-<!--                <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 flex justify-center">-->
-<!--                    <search-bar v-if="!isLoading && !isChartVisible"></search-bar>-->
-<!--                    <div v-if="isLoading" class="loading-animation">-->
-<!--                        Loading...-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="w-16 h-100 bg-transparent"></div>-->
-        <div class="mx-auto max-w-7xl">
+        <!--                <div class="w-16 h-40 bg-transparent"></div>-->
+        <!--                <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 flex justify-center">-->
+        <!--                    <search-bar v-if="!isLoading && !isChartVisible"></search-bar>-->
+        <!--                    <div v-if="isLoading" class="loading-animation">-->
+        <!--                        Loading...-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="w-16 h-100 bg-transparent"></div>-->
+        <div class="mx-auto max-w-7xl flex justify-center mt-50 mb-100">
+            <div class="w-4/5">
+                <search-bar v-if="!isLoading && !isChartVisible"></search-bar>
+            </div>
         </div>
     </default-layout>
 </template>
