@@ -178,7 +178,14 @@ function sendCurrentRange() {
         keyword: searchKeyword.value,
       })
     );
-  }
+  } else {
+    console.log("WebSocket Connection not established");
+
+    // 如果WebSocket连接未建立，重新建立连接
+    setupWebSocket();
+    // 重新发送当前选择和搜索关键词
+    sendCurrentRange();
+  } 
 }
 
 // 新添加的函数，用于处理按钮点击事件

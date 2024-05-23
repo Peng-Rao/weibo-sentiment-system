@@ -139,7 +139,7 @@ const handleSubmit = async () => {
           <div class="w-full px-8 sm:w-1/2">
             <div class="flex w-full items-center">
               <span
-                class="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"
+                class="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#4f5ba7]"
               ></span>
               <p
                 class="flex w-full justify-between text-sm font-medium text-black dark:text-white"
