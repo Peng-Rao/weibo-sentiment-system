@@ -4,6 +4,8 @@ import { useSearchStore } from "@/stores/useSearchStore.js";
 import DarkModeSwitcher from "@/components/Header/DarkModeSwitcher.vue";
 
 const searchKeyword = computed(() => useSearchStore().searchKeyword);
+const isLoading = computed(() => useSearchStore().isLoading);
+const isChartVisible = computed(() => useSearchStore().isChartVisible);
 </script>
 
 <template>

@@ -11,11 +11,12 @@ const searchStore = useSearchStore();
 
 async function performSearch() {
   searchStore.showLoading();
+  searchStore.showChart();
   setTimeout(() => {
     console.log("搜索关键词:", searchQuery.value);
     searchStore.setSearchKeyword(searchQuery.value);
-    searchStore.hideLoading();
-    searchStore.showChart();
+    // searchStore.hideLoading();
+    // searchStore.showChart();
   }, 2000); // 搜索和加载过程
   try {
     const response = await startCrawler("/start_crawler", {
